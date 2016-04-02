@@ -2,6 +2,7 @@ package pt.migcv.binary101.src;
 
 import java.util.ArrayList;
 
+import pt.migcv.binary101.src.exception.IsEmptyException;
 import pt.migcv.binary101.src.exception.NotBinaryException;
 import pt.migcv.binary101.src.exception.NotDecimalException;
 import pt.migcv.binary101.src.exception.NotHexadecimalException;
@@ -10,7 +11,10 @@ public class Converter {
 
     private static char[] hexaAlphabet = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 
-    public static  String[] convertDecimal(String decimalNumber) throws NotDecimalException {
+    public static  String[] convertDecimal(String decimalNumber) throws NotDecimalException, IsEmptyException {
+        if(decimalNumber.isEmpty()) {
+            throw new IsEmptyException(decimalNumber);
+        }
         try {
             String[] res = new String[2];
             // DECIMAL --> BINNARY
@@ -25,7 +29,10 @@ public class Converter {
         }
     }
 
-    public static String[] convertBinary(String binaryNumber) throws NotBinaryException {
+    public static String[] convertBinary(String binaryNumber) throws NotBinaryException, IsEmptyException {
+        if(binaryNumber.isEmpty()) {
+            throw new IsEmptyException(binaryNumber);
+        }
         if(!binaryNumber.matches("^[0-1]+$")) {
             throw new NotBinaryException(binaryNumber);
         }
