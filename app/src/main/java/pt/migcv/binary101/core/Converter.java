@@ -1,11 +1,11 @@
-package pt.migcv.binary101.src;
+package pt.migcv.binary101.core;
 
 import java.util.ArrayList;
 
-import pt.migcv.binary101.src.exception.IsEmptyException;
-import pt.migcv.binary101.src.exception.NotBinaryException;
-import pt.migcv.binary101.src.exception.NotDecimalException;
-import pt.migcv.binary101.src.exception.NotHexadecimalException;
+import pt.migcv.binary101.core.exception.IsEmptyException;
+import pt.migcv.binary101.core.exception.NotBinaryException;
+import pt.migcv.binary101.core.exception.NotDecimalException;
+import pt.migcv.binary101.core.exception.NotHexadecimalException;
 
 public class Converter {
 

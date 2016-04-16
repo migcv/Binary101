@@ -1,4 +1,4 @@
-package pt.migcv.binary101.src.exception;
+package pt.migcv.binary101.core.exception;
 
 public class NotBinaryException extends ConverterException {
 
