@@ -80,7 +80,9 @@
                 android:layout_below="@+id/hexadecimalText"
                 android:layout_toEndOf="@+id/binary1Button"
                 android:layout_weight="1"
-                android:onClick="onClickBinaryDelete" />
+                android:onClick="onClickBinaryDelete"
+                android:backgroundTint="#3f5cbc"
+                android:textColor="#ffffff" />
 
             <Button
                 android:layout_width="0dip"
@@ -92,7 +94,9 @@
                 android:layout_toRightOf="@+id/binaryDeleteButton"
                 android:layout_alignParentEnd="true"
                 android:layout_weight="1"
-                android:onClick="onClickBinaryClr" />
+                android:onClick="onClickBinaryClr"
+                android:textColor="#ffffff"
+                android:backgroundTint="#3f5cbc" />
         </TableRow>
     </TableLayout>
 
@@ -253,7 +257,9 @@
                 android:layout_below="@+id/decimal7Button"
                 android:layout_toStartOf="@+id/decimal8Button"
                 android:layout_weight="1"
-                android:onClick="onClickDecimalDelete" />
+                android:onClick="onClickDecimalDelete"
+                android:backgroundTint="#3f5cbc"
+                android:textColor="#ffffff" />
 
             <Button
                 android:layout_width="0dip"
@@ -263,7 +269,9 @@
                 android:layout_below="@+id/decimal8Button"
                 android:layout_alignParentEnd="true"
                 android:layout_weight="1"
-                android:onClick="onClickDecimalClr" />
+                android:onClick="onClickDecimalClr"
+                android:backgroundTint="#3f5cbc"
+                android:textColor="#ffffff" />
         </TableRow>
     </TableLayout>
 
@@ -493,7 +501,9 @@
                 android:layout_alignEnd="@+id/hexadecimalEButton"
                 android:layout_alignParentStart="true"
                 android:layout_weight="1"
-                android:onClick="onClickHexadecimalDelete" />
+                android:onClick="onClickHexadecimalDelete"
+                android:backgroundTint="#3f5cbc"
+                android:textColor="#ffffff" />
 
             <Button
                 android:layout_width="0dip"
@@ -504,7 +514,9 @@
                 android:layout_alignEnd="@+id/hexadecimal0Button"
                 android:layout_alignStart="@+id/hexadecimalFButton"
                 android:layout_weight="1"
-                android:onClick="onClickHexadecimalClr" />
+                android:onClick="onClickHexadecimalClr"
+                android:textColor="#ffffff"
+                android:backgroundTint="#3f5cbc" />
         </TableRow>
     </TableLayout>
 
