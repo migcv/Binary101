@@ -97,6 +97,9 @@ public class ConverterFragment extends Fragment {
         @Override
         public void onClick(View v) {
             String binaryNumber = (String) binaryText.getText().toString();
+            if(binaryNumber.length() == 0) {
+                return;
+            }
             StringBuilder aux = new StringBuilder(binaryNumber);
             aux.deleteCharAt(binaryNumber.length()-1);
             binaryText.setText(aux.toString());
@@ -122,6 +125,9 @@ public class ConverterFragment extends Fragment {
         @Override
         public void onClick(View v) {
             String decimalNumber = (String) decimalText.getText().toString();
+            if(decimalNumber.length() == 0) {
+                return;
+            }
             StringBuilder aux = new StringBuilder(decimalNumber);
             aux.deleteCharAt(decimalNumber.length()-1);
             decimalText.setText(aux.toString());
@@ -147,6 +153,9 @@ public class ConverterFragment extends Fragment {
         @Override
         public void onClick(View v) {
             String hexadecimalNumber = (String) hexadecimalText.getText().toString();
+            if(hexadecimalNumber.length() == 0) {
+                return;
+            }
             StringBuilder aux = new StringBuilder(hexadecimalNumber);
             aux.deleteCharAt(hexadecimalNumber.length()-1);
             hexadecimalText.setText(aux.toString());
