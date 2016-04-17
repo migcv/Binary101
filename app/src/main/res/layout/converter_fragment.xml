@@ -10,8 +10,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:windowSoftInputMode="stateHidden"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="pt.migcv.binary101.activity.ConverterActivity"
-    tools:showIn="@layout/app_bar_converter">
+    tools:context="pt.migcv.binary101.activities.ConverterFragment">
 
     <TextView
         android:layout_width="wrap_content"

@@ -1,25 +1,16 @@
-package pt.migcv.binary101.activity;
+package pt.migcv.binary101.fragments;
 
-import android.graphics.Color;
+import android.app.Fragment;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import pt.migcv.binary101.R;
@@ -28,7 +19,12 @@ import pt.migcv.binary101.core.exception.NotBinaryException;
 import pt.migcv.binary101.core.exception.NotDecimalException;
 import pt.migcv.binary101.core.exception.NotHexadecimalException;
 
-public class ConverterActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+/**
+ * Created by Miguel on 16/04/2016.
+ */
+public class ConverterFragment extends Fragment {
+
+    View view;
 
     TextView binaryView;
     TextView decimalView;
@@ -78,77 +74,179 @@ public class ConverterActivity extends AppCompatActivity implements NavigationVi
     boolean flag = false;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_converter);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+    }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.converter_fragment, container, false);
+        initializeElements();
+        return view;
+    }
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+    class OnClickBinary implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            Button button = (Button) v;
+            binaryText.setText(binaryText.getText().toString()+button.getText().toString());
+        }
+    }
 
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+    class OnClickBinaryDelete implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            String binaryNumber = (String) binaryText.getText().toString();
+            StringBuilder aux = new StringBuilder(binaryNumber);
+            aux.deleteCharAt(binaryNumber.length()-1);
+            binaryText.setText(aux.toString());
+        }
+    }
 
-        binaryText = (EditText) findViewById(R.id.binaryText);
-        decimalText = (EditText) findViewById(R.id.decimalText);
-        hexadecimalText = (EditText) findViewById(R.id.hexadecimalText);
+    class OnClickBinaryClr implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            binaryText.setText("");
+        }
+    }
 
-        binary0Button = (Button) findViewById(R.id.binary0Button);
-        binary1Button = (Button) findViewById(R.id.binary1Button);
-        binaryDeleteButton = (Button) findViewById(R.id.binaryDeleteButton);
-        binaryClrButton = (Button) findViewById(R.id.binaryClrButton);
+    class OnClickDecimal implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            Button button = (Button) v;
+            decimalText.setText(decimalText.getText().toString() + button.getText().toString());
+        }
+    }
 
-        decimal0Button = (Button) findViewById(R.id.decimal0Button);
-        decimal1Button = (Button) findViewById(R.id.decimal1Button);
-        decimal2Button = (Button) findViewById(R.id.decimal2Button);
-        decimal3Button = (Button) findViewById(R.id.decimal3Button);
-        decimal4Button = (Button) findViewById(R.id.decimal4Button);
-        decimal5Button = (Button) findViewById(R.id.decimal5Button);
-        decimal6Button = (Button) findViewById(R.id.decimal6Button);
-        decimal7Button = (Button) findViewById(R.id.decimal7Button);
-        decimal8Button = (Button) findViewById(R.id.decimal8Button);
-        decimal9Button = (Button) findViewById(R.id.decimal9Button);
-        decimalDeleteButton = (Button) findViewById(R.id.decimalDeleteButton);
-        decimalClrButton = (Button) findViewById(R.id.decimalClrButton);
+    class OnClickDecimalDelete implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            String decimalNumber = (String) decimalText.getText().toString();
+            StringBuilder aux = new StringBuilder(decimalNumber);
+            aux.deleteCharAt(decimalNumber.length()-1);
+            decimalText.setText(aux.toString());
+        }
+    }
 
-        hexadecimal0Button = (Button) findViewById(R.id.hexadecimal0Button);
-        hexadecimal1Button = (Button) findViewById(R.id.hexadecimal1Button);
-        hexadecimal2Button = (Button) findViewById(R.id.hexadecimal2Button);
-        hexadecimal3Button = (Button) findViewById(R.id.hexadecimal3Button);
-        hexadecimal4Button = (Button) findViewById(R.id.hexadecimal4Button);
-        hexadecimal5Button = (Button) findViewById(R.id.hexadecimal5Button);
-        hexadecimal6Button = (Button) findViewById(R.id.hexadecimal6Button);
-        hexadecimal7Button = (Button) findViewById(R.id.hexadecimal7Button);
-        hexadecimal8Button = (Button) findViewById(R.id.hexadecimal8Button);
-        hexadecimal9Button = (Button) findViewById(R.id.hexadecimal9Button);
-        hexadecimalAButton = (Button) findViewById(R.id.hexadecimalAButton);
-        hexadecimalBButton = (Button) findViewById(R.id.hexadecimalBButton);
-        hexadecimalCButton = (Button) findViewById(R.id.hexadecimalCButton);
-        hexadecimalDButton = (Button) findViewById(R.id.hexadecimalDButton);
-        hexadecimalEButton = (Button) findViewById(R.id.hexadecimalEButton);
-        hexadecimalFButton = (Button) findViewById(R.id.hexadecimalFButton);
-        hexadecimalDeleteButton = (Button) findViewById(R.id.hexadecimalDeleteButton);
-        hexadecimalClrButton = (Button) findViewById(R.id.hexadecimalClrButton);
+    class onClickDecimalClr implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            decimalText.setText("");
+        }
+    }
 
-        this.setAllButtonsInvisible();
+    class onClickHexadecimal implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            Button button = (Button) v;
+            hexadecimalText.setText(hexadecimalText.getText().toString()+button.getText().toString());
+        }
+    }
 
-        decimalView = (TextView) findViewById(R.id.decimalView);
-        binaryView = (TextView) findViewById(R.id.binaryView);
-        hexadecimalView = (TextView) findViewById(R.id.hexadecimalView);
+    class onClickHexadecimalDelete implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            String hexadecimalNumber = (String) hexadecimalText.getText().toString();
+            StringBuilder aux = new StringBuilder(hexadecimalNumber);
+            aux.deleteCharAt(hexadecimalNumber.length()-1);
+            hexadecimalText.setText(aux.toString());
+        }
+    }
 
-        final EditText binaryText = (EditText) findViewById(R.id.binaryText);
-        final EditText decimalText = (EditText) findViewById(R.id.decimalText);
-        final EditText hexadecimalText = (EditText) findViewById(R.id.hexadecimalText);
+    class onClickHexadecimalClr implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            hexadecimalText.setText("");
+        }
+    }
+
+    public void initializeElements() {
+
+        binary0Button = (Button) view.findViewById(R.id.binary0Button);
+        binary1Button = (Button) view.findViewById(R.id.binary1Button);
+        binaryDeleteButton = (Button) view.findViewById(R.id.binaryDeleteButton);
+        binaryClrButton = (Button) view.findViewById(R.id.binaryClrButton);
+
+        decimal0Button = (Button) view.findViewById(R.id.decimal0Button);
+        decimal1Button = (Button) view.findViewById(R.id.decimal1Button);
+        decimal2Button = (Button) view.findViewById(R.id.decimal2Button);
+        decimal3Button = (Button) view.findViewById(R.id.decimal3Button);
+        decimal4Button = (Button) view.findViewById(R.id.decimal4Button);
+        decimal5Button = (Button) view.findViewById(R.id.decimal5Button);
+        decimal6Button = (Button) view.findViewById(R.id.decimal6Button);
+        decimal7Button = (Button) view.findViewById(R.id.decimal7Button);
+        decimal8Button = (Button) view.findViewById(R.id.decimal8Button);
+        decimal9Button = (Button) view.findViewById(R.id.decimal9Button);
+        decimalDeleteButton = (Button) view.findViewById(R.id.decimalDeleteButton);
+        decimalClrButton = (Button) view.findViewById(R.id.decimalClrButton);
+
+        hexadecimal0Button = (Button) view.findViewById(R.id.hexadecimal0Button);
+        hexadecimal1Button = (Button) view.findViewById(R.id.hexadecimal1Button);
+        hexadecimal2Button = (Button) view.findViewById(R.id.hexadecimal2Button);
+        hexadecimal3Button = (Button) view.findViewById(R.id.hexadecimal3Button);
+        hexadecimal4Button = (Button) view.findViewById(R.id.hexadecimal4Button);
+        hexadecimal5Button = (Button) view.findViewById(R.id.hexadecimal5Button);
+        hexadecimal6Button = (Button) view.findViewById(R.id.hexadecimal6Button);
+        hexadecimal7Button = (Button) view.findViewById(R.id.hexadecimal7Button);
+        hexadecimal8Button = (Button) view.findViewById(R.id.hexadecimal8Button);
+        hexadecimal9Button = (Button) view.findViewById(R.id.hexadecimal9Button);
+        hexadecimalAButton = (Button) view.findViewById(R.id.hexadecimalAButton);
+        hexadecimalBButton = (Button) view.findViewById(R.id.hexadecimalBButton);
+        hexadecimalCButton = (Button) view.findViewById(R.id.hexadecimalCButton);
+        hexadecimalDButton = (Button) view.findViewById(R.id.hexadecimalDButton);
+        hexadecimalEButton = (Button) view.findViewById(R.id.hexadecimalEButton);
+        hexadecimalFButton = (Button) view.findViewById(R.id.hexadecimalFButton);
+        hexadecimalDeleteButton = (Button) view.findViewById(R.id.hexadecimalDeleteButton);
+        hexadecimalClrButton = (Button) view.findViewById(R.id.hexadecimalClrButton);
+
+        decimalView = (TextView) view.findViewById(R.id.decimalView);
+        binaryView = (TextView) view.findViewById(R.id.binaryView);
+        hexadecimalView = (TextView) view.findViewById(R.id.hexadecimalView);
+
+        binaryText = (EditText) view.findViewById(R.id.binaryText);
+        decimalText = (EditText) view.findViewById(R.id.decimalText);
+        hexadecimalText = (EditText) view.findViewById(R.id.hexadecimalText);
+
+        setAllButtonsInvisible();
 
         binaryText.setInputType(EditorInfo.TYPE_NULL);
         hexadecimalText.setInputType(EditorInfo.TYPE_NULL);
         decimalText.setInputType(EditorInfo.TYPE_NULL);
+
+        binary0Button.setOnClickListener(new OnClickBinary());
+        binary1Button.setOnClickListener(new OnClickBinary());
+        binaryDeleteButton.setOnClickListener(new OnClickBinaryDelete());
+        binaryClrButton.setOnClickListener(new OnClickBinaryClr());
+        decimal0Button.setOnClickListener(new OnClickDecimal());
+        decimal1Button.setOnClickListener(new OnClickDecimal());
+        decimal2Button.setOnClickListener(new OnClickDecimal());
+        decimal3Button.setOnClickListener(new OnClickDecimal());
+        decimal4Button.setOnClickListener(new OnClickDecimal());
+        decimal5Button.setOnClickListener(new OnClickDecimal());
+        decimal6Button.setOnClickListener(new OnClickDecimal());
+        decimal7Button.setOnClickListener(new OnClickDecimal());
+        decimal8Button.setOnClickListener(new OnClickDecimal());
+        decimal9Button.setOnClickListener(new OnClickDecimal());
+        decimalDeleteButton.setOnClickListener(new OnClickDecimalDelete());
+        decimalClrButton.setOnClickListener(new onClickDecimalClr());
+        hexadecimal0Button.setOnClickListener(new onClickHexadecimal());
+        hexadecimal1Button.setOnClickListener(new onClickHexadecimal());
+        hexadecimal2Button.setOnClickListener(new onClickHexadecimal());
+        hexadecimal3Button.setOnClickListener(new onClickHexadecimal());
+        hexadecimal4Button.setOnClickListener(new onClickHexadecimal());
+        hexadecimal5Button.setOnClickListener(new onClickHexadecimal());
+        hexadecimal6Button.setOnClickListener(new onClickHexadecimal());
+        hexadecimal7Button.setOnClickListener(new onClickHexadecimal());
+        hexadecimal8Button.setOnClickListener(new onClickHexadecimal());
+        hexadecimal9Button.setOnClickListener(new onClickHexadecimal());
+        hexadecimalAButton.setOnClickListener(new onClickHexadecimal());
+        hexadecimalBButton.setOnClickListener(new onClickHexadecimal());
+        hexadecimalCButton.setOnClickListener(new onClickHexadecimal());
+        hexadecimalDButton.setOnClickListener(new onClickHexadecimal());
+        hexadecimalEButton.setOnClickListener(new onClickHexadecimal());
+        hexadecimalFButton.setOnClickListener(new onClickHexadecimal());
+        hexadecimalDeleteButton.setOnClickListener(new onClickHexadecimalDelete());
+        hexadecimalClrButton.setOnClickListener(new onClickHexadecimalClr());
 
         binaryText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -340,111 +438,6 @@ public class ConverterActivity extends AppCompatActivity implements NavigationVi
                 }
             }
         });
-    }
-
-    public void onClickBinary(View view) {
-        Button button = (Button) view;
-        binaryText.setText(binaryText.getText().toString()+button.getText().toString());
-    }
-
-    public void onClickBinaryDelete(View view) {
-        String binaryNumber = (String) binaryText.getText().toString();
-        StringBuilder aux = new StringBuilder(binaryNumber);
-        aux.deleteCharAt(binaryNumber.length()-1);
-        binaryText.setText(aux.toString());
-    }
-
-    public void onClickBinaryClr(View view) {
-        binaryText.setText("");
-    }
-
-    public void onClickDecimal(View view) {
-        Button button = (Button) view;
-        decimalText.setText(decimalText.getText().toString() + button.getText().toString());
-    }
-
-    public void onClickDecimalDelete(View view) {
-        String decimalNumber = (String) decimalText.getText().toString();
-        StringBuilder aux = new StringBuilder(decimalNumber);
-        aux.deleteCharAt(decimalNumber.length()-1);
-        decimalText.setText(aux.toString());
-    }
-
-    public void onClickDecimalClr(View view) {
-        decimalText.setText("");
-    }
-
-    public void onClickHexadecimal(View view) {
-        Button button = (Button) view;
-        hexadecimalText.setText(hexadecimalText.getText().toString()+button.getText().toString());
-    }
-
-    public void onClickHexadecimalDelete(View view) {
-        String hexadecimalNumber = (String) hexadecimalText.getText().toString();
-        StringBuilder aux = new StringBuilder(hexadecimalNumber);
-        aux.deleteCharAt(hexadecimalNumber.length()-1);
-        hexadecimalText.setText(aux.toString());
-    }
-
-    public void onClickHexadecimalClr(View view) {
-        hexadecimalText.setText("");
-    }
-
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.converter, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
     }
 
     private void setAllButtonsInvisible() {
