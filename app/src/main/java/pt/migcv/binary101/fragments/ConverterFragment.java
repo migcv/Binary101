@@ -19,16 +19,8 @@ import pt.migcv.binary101.core.exception.NotBinaryException;
 import pt.migcv.binary101.core.exception.NotDecimalException;
 import pt.migcv.binary101.core.exception.NotHexadecimalException;
 
-/**
- * Created by Miguel on 16/04/2016.
- */
 public class ConverterFragment extends Fragment {
-
     View view;
-
-    TextView binaryView;
-    TextView decimalView;
-    TextView hexadecimalView;
 
     EditText binaryText;
     EditText decimalText;
@@ -93,51 +85,11 @@ public class ConverterFragment extends Fragment {
         }
     }
 
-    class OnClickBinaryDelete implements View.OnClickListener {
-        @Override
-        public void onClick(View v) {
-            String binaryNumber = (String) binaryText.getText().toString();
-            if(binaryNumber.length() == 0) {
-                return;
-            }
-            StringBuilder aux = new StringBuilder(binaryNumber);
-            aux.deleteCharAt(binaryNumber.length()-1);
-            binaryText.setText(aux.toString());
-        }
-    }
-
-    class OnClickBinaryClr implements View.OnClickListener {
-        @Override
-        public void onClick(View v) {
-            binaryText.setText("");
-        }
-    }
-
     class OnClickDecimal implements View.OnClickListener {
         @Override
         public void onClick(View v) {
             Button button = (Button) v;
             decimalText.setText(decimalText.getText().toString() + button.getText().toString());
-        }
-    }
-
-    class OnClickDecimalDelete implements View.OnClickListener {
-        @Override
-        public void onClick(View v) {
-            String decimalNumber = (String) decimalText.getText().toString();
-            if(decimalNumber.length() == 0) {
-                return;
-            }
-            StringBuilder aux = new StringBuilder(decimalNumber);
-            aux.deleteCharAt(decimalNumber.length()-1);
-            decimalText.setText(aux.toString());
-        }
-    }
-
-    class onClickDecimalClr implements View.OnClickListener {
-        @Override
-        public void onClick(View v) {
-            decimalText.setText("");
         }
     }
 
@@ -149,23 +101,43 @@ public class ConverterFragment extends Fragment {
         }
     }
 
-    class onClickHexadecimalDelete implements View.OnClickListener {
+    class OnClickDelete implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            String hexadecimalNumber = (String) hexadecimalText.getText().toString();
-            if(hexadecimalNumber.length() == 0) {
-                return;
+            EditText text = null;
+            if(v.getId() == R.id.binaryDeleteButton) {
+                text = binaryText;
             }
-            StringBuilder aux = new StringBuilder(hexadecimalNumber);
-            aux.deleteCharAt(hexadecimalNumber.length()-1);
-            hexadecimalText.setText(aux.toString());
+            else if(v.getId() == R.id.decimalDeleteButton) {
+                text = decimalText;
+            }
+            else if(v.getId() == R.id.hexadecimalDeleteButton) {
+                text = hexadecimalText;
+            }
+            if(text != null) {
+                String textNumber = (String) text.getText().toString();
+                if (textNumber.length() == 0) {
+                    return;
+                }
+                StringBuilder aux = new StringBuilder(textNumber);
+                aux.deleteCharAt(textNumber.length() - 1);
+                text.setText(aux.toString());
+            }
         }
     }
 
-    class onClickHexadecimalClr implements View.OnClickListener {
+    class OnClickClr implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            hexadecimalText.setText("");
+            if(v.getId() == R.id.binaryClrButton) {
+                binaryText.setText("");
+            }
+            else if(v.getId() == R.id.decimalClrButton) {
+                decimalText.setText("");
+            }
+            else if(v.getId() == R.id.hexadecimalClrButton) {
+                hexadecimalText.setText("");
+            }
         }
     }
 
@@ -208,10 +180,6 @@ public class ConverterFragment extends Fragment {
         hexadecimalDeleteButton = (Button) view.findViewById(R.id.hexadecimalDeleteButton);
         hexadecimalClrButton = (Button) view.findViewById(R.id.hexadecimalClrButton);
 
-        decimalView = (TextView) view.findViewById(R.id.decimalView);
-        binaryView = (TextView) view.findViewById(R.id.binaryView);
-        hexadecimalView = (TextView) view.findViewById(R.id.hexadecimalView);
-
         binaryText = (EditText) view.findViewById(R.id.binaryText);
         decimalText = (EditText) view.findViewById(R.id.decimalText);
         hexadecimalText = (EditText) view.findViewById(R.id.hexadecimalText);
@@ -224,8 +192,8 @@ public class ConverterFragment extends Fragment {
 
         binary0Button.setOnClickListener(new OnClickBinary());
         binary1Button.setOnClickListener(new OnClickBinary());
-        binaryDeleteButton.setOnClickListener(new OnClickBinaryDelete());
-        binaryClrButton.setOnClickListener(new OnClickBinaryClr());
+        binaryDeleteButton.setOnClickListener(new OnClickDelete());
+        binaryClrButton.setOnClickListener(new OnClickClr());
         decimal0Button.setOnClickListener(new OnClickDecimal());
         decimal1Button.setOnClickListener(new OnClickDecimal());
         decimal2Button.setOnClickListener(new OnClickDecimal());
@@ -236,8 +204,8 @@ public class ConverterFragment extends Fragment {
         decimal7Button.setOnClickListener(new OnClickDecimal());
         decimal8Button.setOnClickListener(new OnClickDecimal());
         decimal9Button.setOnClickListener(new OnClickDecimal());
-        decimalDeleteButton.setOnClickListener(new OnClickDecimalDelete());
-        decimalClrButton.setOnClickListener(new onClickDecimalClr());
+        decimalDeleteButton.setOnClickListener(new OnClickDelete());
+        decimalClrButton.setOnClickListener(new OnClickClr());
         hexadecimal0Button.setOnClickListener(new onClickHexadecimal());
         hexadecimal1Button.setOnClickListener(new onClickHexadecimal());
         hexadecimal2Button.setOnClickListener(new onClickHexadecimal());
@@ -254,8 +222,8 @@ public class ConverterFragment extends Fragment {
         hexadecimalDButton.setOnClickListener(new onClickHexadecimal());
         hexadecimalEButton.setOnClickListener(new onClickHexadecimal());
         hexadecimalFButton.setOnClickListener(new onClickHexadecimal());
-        hexadecimalDeleteButton.setOnClickListener(new onClickHexadecimalDelete());
-        hexadecimalClrButton.setOnClickListener(new onClickHexadecimalClr());
+        hexadecimalDeleteButton.setOnClickListener(new OnClickDelete());
+        hexadecimalClrButton.setOnClickListener(new OnClickClr());
 
         binaryText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override

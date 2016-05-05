@@ -56,30 +56,21 @@
                 android:layout_height="wrap_content"
                 android:text="0"
                 android:id="@+id/binary0Button"
-                android:layout_below="@+id/hexadecimalText"
-                android:layout_alignParentStart="true"
-                android:layout_weight="1"
-                android:onClick="onClickBinary" />
+                android:layout_weight="1" />
 
             <Button
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:text="1"
                 android:id="@+id/binary1Button"
-                android:layout_below="@+id/hexadecimalText"
-                android:layout_toEndOf="@+id/binary0Button"
-                android:layout_weight="1"
-                android:onClick="onClickBinary" />
+                android:layout_weight="1" />
 
             <Button
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:text="&lt;&lt;"
                 android:id="@+id/binaryDeleteButton"
-                android:layout_below="@+id/hexadecimalText"
-                android:layout_toEndOf="@+id/binary1Button"
                 android:layout_weight="1"
-                android:onClick="onClickBinaryDelete"
                 android:backgroundTint="#3f5cbc"
                 android:textColor="#ffffff" />
 
@@ -88,12 +79,7 @@
                 android:layout_height="wrap_content"
                 android:text="CLR"
                 android:id="@+id/binaryClrButton"
-                android:layout_alignBottom="@+id/binaryDeleteButton"
-                android:layout_toEndOf="@+id/binaryDeleteButton"
-                android:layout_toRightOf="@+id/binaryDeleteButton"
-                android:layout_alignParentEnd="true"
                 android:layout_weight="1"
-                android:onClick="onClickBinaryClr"
                 android:textColor="#ffffff"
                 android:backgroundTint="#3f5cbc" />
         </TableRow>
@@ -141,41 +127,28 @@
                 android:layout_height="wrap_content"
                 android:text="1"
                 android:id="@+id/decimal1Button"
-                android:layout_below="@+id/hexadecimalText"
-                android:layout_alignParentStart="true"
-                android:layout_weight="1"
-                android:onClick="onClickDecimal" />
+                android:layout_weight="1" />
 
             <Button
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:text="2"
                 android:id="@+id/decimal2Button"
-                android:layout_below="@+id/hexadecimalText"
-                android:layout_toEndOf="@+id/decimal1Button"
-                android:layout_weight="1"
-                android:onClick="onClickDecimal" />
+                android:layout_weight="1" />
 
             <Button
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:text="3"
                 android:id="@+id/decimal3Button"
-                android:layout_below="@+id/hexadecimalText"
-                android:layout_toEndOf="@+id/decimal2Button"
-                android:layout_weight="1"
-                android:nestedScrollingEnabled="false"
-                android:onClick="onClickDecimal" />
+                android:layout_weight="1" />
 
             <Button
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:text="4"
                 android:id="@+id/decimal4Button"
-                android:layout_below="@+id/hexadecimalText"
-                android:layout_toEndOf="@+id/decimal3Button"
-                android:layout_weight="1"
-                android:onClick="onClickDecimal" />
+                android:layout_weight="1" />
         </TableRow>
 
         <TableRow
@@ -187,41 +160,28 @@
                 android:layout_height="wrap_content"
                 android:text="5"
                 android:id="@+id/decimal5Button"
-                android:layout_below="@+id/decimal1Button"
-                android:layout_toStartOf="@+id/decimal2Button"
-                android:layout_weight="1"
-                android:onClick="onClickDecimal" />
+                android:layout_weight="1" />
 
             <Button
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:text="6"
                 android:id="@+id/decimal6Button"
-                android:layout_below="@+id/decimal2Button"
-                android:layout_alignStart="@+id/decimal2Button"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:onClick="onClickDecimal" />
+                android:layout_weight="1" />
 
             <Button
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:text="7"
                 android:id="@+id/decimal7Button"
-                android:layout_below="@+id/decimal3Button"
-                android:layout_alignStart="@+id/decimal3Button"
-                android:layout_weight="1"
-                android:onClick="onClickDecimal" />
+                android:layout_weight="1" />
 
             <Button
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:text="8"
                 android:id="@+id/decimal8Button"
-                android:layout_below="@+id/decimal4Button"
-                android:layout_alignParentEnd="true"
-                android:layout_weight="1"
-                android:onClick="onClickDecimal" />
+                android:layout_weight="1" />
         </TableRow>
 
         <TableRow
@@ -233,30 +193,21 @@
                 android:layout_height="wrap_content"
                 android:text="9"
                 android:id="@+id/decimal9Button"
-                android:layout_below="@+id/decimal5Button"
-                android:layout_alignParentStart="true"
-                android:layout_weight="1"
-                android:onClick="onClickDecimal" />
+                android:layout_weight="1" />
 
             <Button
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:text="0"
                 android:id="@+id/decimal0Button"
-                android:layout_below="@+id/decimal6Button"
-                android:layout_alignStart="@+id/decimal6Button"
-                android:layout_weight="1"
-                android:onClick="onClickDecimal" />
+                android:layout_weight="1" />
 
             <Button
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:text="&lt;&lt;"
                 android:id="@+id/decimalDeleteButton"
-                android:layout_below="@+id/decimal7Button"
-                android:layout_toStartOf="@+id/decimal8Button"
                 android:layout_weight="1"
-                android:onClick="onClickDecimalDelete"
                 android:backgroundTint="#3f5cbc"
                 android:textColor="#ffffff" />
 
@@ -265,10 +216,7 @@
                 android:layout_height="wrap_content"
                 android:text="Clr"
                 android:id="@+id/decimalClrButton"
-                android:layout_below="@+id/decimal8Button"
-                android:layout_alignParentEnd="true"
                 android:layout_weight="1"
-                android:onClick="onClickDecimalClr"
                 android:backgroundTint="#3f5cbc"
                 android:textColor="#ffffff" />
         </TableRow>
@@ -315,8 +263,6 @@
                 android:layout_height="wrap_content"
                 android:text="1"
                 android:id="@+id/hexadecimal1Button"
-                android:layout_below="@+id/hexadecimalText"
-                android:layout_alignParentStart="true"
                 android:layout_weight="1"
                 android:onClick="onClickHexadecimal" />
 
@@ -325,10 +271,7 @@
                 android:layout_height="wrap_content"
                 android:text="2"
                 android:id="@+id/hexadecimal2Button"
-                android:layout_alignBottom="@+id/hexadecimal1Button"
-                android:layout_toEndOf="@+id/hexadecimal1Button"
                 android:layout_weight="1"
-                android:nestedScrollingEnabled="false"
                 android:onClick="onClickHexadecimal" />
 
             <Button
@@ -336,8 +279,6 @@
                 android:layout_height="wrap_content"
                 android:text="3"
                 android:id="@+id/hexadecimal3Button"
-                android:layout_below="@+id/hexadecimalText"
-                android:layout_toEndOf="@+id/hexadecimal2Button"
                 android:layout_weight="1"
                 android:onClick="onClickHexadecimal" />
 
@@ -346,8 +287,6 @@
                 android:layout_height="wrap_content"
                 android:text="4"
                 android:id="@+id/hexadecimal4Button"
-                android:layout_below="@+id/hexadecimalText"
-                android:layout_alignStart="@+id/hexadecimal0Button"
                 android:layout_weight="1"
                 android:onClick="onClickHexadecimal" />
         </TableRow>
@@ -361,40 +300,28 @@
                 android:layout_height="wrap_content"
                 android:text="5"
                 android:id="@+id/hexadecimal5Button"
-                android:layout_below="@+id/hexadecimal1Button"
-                android:layout_alignParentStart="true"
-                android:layout_weight="1"
-                android:onClick="onClickHexadecimal" />
+                android:layout_weight="1" />
 
             <Button
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:text="6"
                 android:id="@+id/hexadecimal6Button"
-                android:layout_below="@+id/hexadecimal1Button"
-                android:layout_toEndOf="@+id/hexadecimal1Button"
-                android:layout_weight="1"
-                android:onClick="onClickHexadecimal" />
+                android:layout_weight="1" />
 
             <Button
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:text="7"
                 android:id="@+id/hexadecimal7Button"
-                android:layout_below="@+id/hexadecimal3Button"
-                android:layout_toStartOf="@+id/hexadecimal4Button"
-                android:layout_weight="1"
-                android:onClick="onClickHexadecimal" />
+                android:layout_weight="1" />
 
             <Button
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:text="8"
                 android:id="@+id/hexadecimal8Button"
-                android:layout_below="@+id/hexadecimal3Button"
-                android:layout_toEndOf="@+id/hexadecimal7Button"
-                android:layout_weight="1"
-                android:onClick="onClickHexadecimal" />
+                android:layout_weight="1" />
         </TableRow>
 
         <TableRow
@@ -406,40 +333,28 @@
                 android:layout_height="wrap_content"
                 android:text="9"
                 android:id="@+id/hexadecimal9Button"
-                android:layout_below="@+id/hexadecimal5Button"
-                android:layout_alignParentStart="true"
-                android:layout_weight="1"
-                android:onClick="onClickHexadecimal" />
+                android:layout_weight="1" />
 
             <Button
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:text="0"
                 android:id="@+id/hexadecimal0Button"
-                android:layout_alignTop="@+id/hexadecimalFButton"
-                android:layout_alignParentEnd="true"
-                android:layout_weight="1"
-                android:onClick="onClickHexadecimal" />
+                android:layout_weight="1" />
 
             <Button
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:text="A"
                 android:id="@+id/hexadecimalAButton"
-                android:layout_below="@+id/hexadecimal7Button"
-                android:layout_toStartOf="@+id/hexadecimal7Button"
-                android:layout_weight="1"
-                android:onClick="onClickHexadecimal" />
+                android:layout_weight="1" />
 
             <Button
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:text="B"
                 android:id="@+id/hexadecimalBButton"
-                android:layout_below="@+id/hexadecimal7Button"
-                android:layout_toStartOf="@+id/hexadecimal8Button"
-                android:layout_weight="1"
-                android:onClick="onClickHexadecimal" />
+                android:layout_weight="1" />
         </TableRow>
 
         <TableRow
@@ -451,40 +366,28 @@
                 android:layout_height="wrap_content"
                 android:text="C"
                 android:id="@+id/hexadecimalCButton"
-                android:layout_below="@+id/hexadecimal7Button"
-                android:layout_toEndOf="@+id/hexadecimal7Button"
-                android:layout_weight="1"
-                android:onClick="onClickHexadecimal" />
+                android:layout_weight="1" />
 
             <Button
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:text="D"
                 android:id="@+id/hexadecimalDButton"
-                android:layout_below="@+id/hexadecimal9Button"
-                android:layout_toStartOf="@+id/hexadecimalAButton"
-                android:layout_weight="1"
-                android:onClick="onClickHexadecimal" />
+                android:layout_weight="1" />
 
             <Button
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:text="E"
                 android:id="@+id/hexadecimalEButton"
-                android:layout_below="@+id/hexadecimalAButton"
-                android:layout_alignStart="@+id/hexadecimalAButton"
-                android:layout_weight="1"
-                android:onClick="onClickHexadecimal" />
+                android:layout_weight="1" />
 
             <Button
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:text="F"
                 android:id="@+id/hexadecimalFButton"
-                android:layout_alignTop="@+id/hexadecimalEButton"
-                android:layout_toStartOf="@+id/hexadecimal0Button"
-                android:layout_weight="1"
-                android:onClick="onClickHexadecimal" />
+                android:layout_weight="1" />
         </TableRow>
 
         <TableRow
@@ -496,11 +399,7 @@
                 android:layout_height="wrap_content"
                 android:text="&lt;&lt;"
                 android:id="@+id/hexadecimalDeleteButton"
-                android:layout_below="@+id/hexadecimalDButton"
-                android:layout_alignEnd="@+id/hexadecimalEButton"
-                android:layout_alignParentStart="true"
                 android:layout_weight="1"
-                android:onClick="onClickHexadecimalDelete"
                 android:backgroundTint="#3f5cbc"
                 android:textColor="#ffffff" />
 
@@ -509,11 +408,7 @@
                 android:layout_height="wrap_content"
                 android:text="CLR"
                 android:id="@+id/hexadecimalClrButton"
-                android:layout_below="@+id/hexadecimal0Button"
-                android:layout_alignEnd="@+id/hexadecimal0Button"
-                android:layout_alignStart="@+id/hexadecimalFButton"
                 android:layout_weight="1"
-                android:onClick="onClickHexadecimalClr"
                 android:textColor="#ffffff"
                 android:backgroundTint="#3f5cbc" />
         </TableRow>
