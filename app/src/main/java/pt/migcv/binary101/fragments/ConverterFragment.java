@@ -7,11 +7,9 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import pt.migcv.binary101.R;
 import pt.migcv.binary101.core.Converter;
@@ -142,12 +140,12 @@ public class ConverterFragment extends Fragment {
     }
 
     public void initializeElements() {
-
+        //BINARY BUTTONS
         binary0Button = (Button) view.findViewById(R.id.binary0Button);
         binary1Button = (Button) view.findViewById(R.id.binary1Button);
         binaryDeleteButton = (Button) view.findViewById(R.id.binaryDeleteButton);
         binaryClrButton = (Button) view.findViewById(R.id.binaryClrButton);
-
+        //DECIMAL BUTTONS
         decimal0Button = (Button) view.findViewById(R.id.decimal0Button);
         decimal1Button = (Button) view.findViewById(R.id.decimal1Button);
         decimal2Button = (Button) view.findViewById(R.id.decimal2Button);
@@ -160,7 +158,7 @@ public class ConverterFragment extends Fragment {
         decimal9Button = (Button) view.findViewById(R.id.decimal9Button);
         decimalDeleteButton = (Button) view.findViewById(R.id.decimalDeleteButton);
         decimalClrButton = (Button) view.findViewById(R.id.decimalClrButton);
-
+        //HEXADECIMAL BUTTONS
         hexadecimal0Button = (Button) view.findViewById(R.id.hexadecimal0Button);
         hexadecimal1Button = (Button) view.findViewById(R.id.hexadecimal1Button);
         hexadecimal2Button = (Button) view.findViewById(R.id.hexadecimal2Button);
@@ -184,11 +182,11 @@ public class ConverterFragment extends Fragment {
         decimalText = (EditText) view.findViewById(R.id.decimalText);
         hexadecimalText = (EditText) view.findViewById(R.id.hexadecimalText);
 
-        setAllButtonsInvisible();
-
         binaryText.setInputType(EditorInfo.TYPE_NULL);
         hexadecimalText.setInputType(EditorInfo.TYPE_NULL);
         decimalText.setInputType(EditorInfo.TYPE_NULL);
+
+        setAllButtonsInvisible();
 
         binary0Button.setOnClickListener(new OnClickBinary());
         binary1Button.setOnClickListener(new OnClickBinary());
@@ -231,7 +229,9 @@ public class ConverterFragment extends Fragment {
                 setAllButtonsInvisible();
                 if (binaryText.getText().toString().equals("0")) {
                     binaryText.setText("");
+                    flag = false;
                 }
+                System.out.println("WIDTH <binaryText> : " + binaryText.getMeasuredWidth());
                 binary0Button.setVisibility(View.VISIBLE);
                 binary1Button.setVisibility(View.VISIBLE);
                 binaryDeleteButton.setVisibility(View.VISIBLE);
@@ -303,16 +303,15 @@ public class ConverterFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 try {
                     String[] numbers = Converter.convertDecimal(decimalText.getText().toString());
-                    System.out.println("10:BINARY: " + numbers[0]);
-                    System.out.println("10:HEXADECIMAL: " + numbers[1]);
                     if (!flag) {
                         flag = true;
-                        binaryText.setText("" + numbers[0]);
-                        hexadecimalText.setText("" + numbers[1]);
+                        binaryText.setText(numbers[0]);
+                        decimalText.setText(numbers[1]);
+                        hexadecimalText.setText(numbers[2]);
                         flag = false;
                     }
                 } catch (NotDecimalException e) {
-                    System.out.println("DecimalText: " + e.getMessage());
+                    System.out.println("DecimalText <NotDecimalException> : " + e.getMessage());
                     if (!flag) {
                         flag = true;
                         binaryText.setText("0");
@@ -320,7 +319,7 @@ public class ConverterFragment extends Fragment {
                         flag = false;
                     }
                 } catch (Exception e) {
-                    System.out.println("DecimalText: " + e.getMessage());
+                    System.out.println("DecimalText <"+  e.getClass().toString() + "> :" + e.getMessage());
                     if (!flag) {
                         flag = true;
                         binaryText.setText("0");
@@ -345,16 +344,15 @@ public class ConverterFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 try {
                     String[] numbers = Converter.convertBinary(binaryText.getText().toString());
-                    System.out.println("2:DECIMAL: " + numbers[0]);
-                    System.out.println("2:HEXADECIMAL: " + numbers[1]);
                     if (!flag) {
                         flag = true;
-                        decimalText.setText("" + numbers[0]);
-                        hexadecimalText.setText("" + numbers[1]);
+                        binaryText.setText(numbers[0]);
+                        decimalText.setText(numbers[1]);
+                        hexadecimalText.setText(numbers[2]);
                         flag = false;
                     }
                 } catch (NotBinaryException e) {
-                    System.out.println("BinaryText: " + e.getMessage());
+                    System.out.println("BinaryText <NotBinaryException> : " + e.getMessage());
                     if (!flag) {
                         flag = true;
                         decimalText.setText("0");
@@ -362,7 +360,7 @@ public class ConverterFragment extends Fragment {
                         flag = false;
                     }
                 } catch (Exception e) {
-                    System.out.println("BinaryText: " + e.getMessage());
+                    System.out.println("BinaryText <" + e.getClass().toString() + "> :" + e.getMessage());
                     if (!flag) {
                         flag = true;
                         decimalText.setText("0");
@@ -387,17 +385,15 @@ public class ConverterFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 try {
                     String[] numbers = Converter.convertHexadecimal(hexadecimalText.getText().toString());
-                    System.out.println("16:DECIMAL: " + numbers[0]);
-                    System.out.println("16:BINARY: " + numbers[1]);
                     if (!flag) {
                         flag = true;
-                        decimalText.setText("" + numbers[0]);
-                        binaryText.setText("" + numbers[1]);
-                        hexadecimalText.setText(hexadecimalText.getText().toString().toUpperCase());
+                        binaryText.setText(numbers[0]);
+                        decimalText.setText(numbers[1]);
+                        hexadecimalText.setText(numbers[2]);
                         flag = false;
                     }
                 } catch (NotHexadecimalException e) {
-                    System.out.println("HexadecimalException: " + e.getMessage());
+                    System.out.println("HexadecimalException <NotHexadecimalException> : " + e.getMessage());
                     if (!flag) {
                         flag = true;
                         decimalText.setText("0");
@@ -405,11 +401,11 @@ public class ConverterFragment extends Fragment {
                         flag = false;
                     }
                 } catch (Exception e) {
-                    System.out.println("HexadecimalException: " + e.getMessage());
+                    System.out.println("HexadecimalException <" + e.getClass().toString() + "> :" + e.getMessage());
                     if (!flag) {
                         flag = true;
                         decimalText.setText("0");
-                        binaryText.setText("0");
+                        hexadecimalText.setText("0");
                         flag = false;
                     }
                 }

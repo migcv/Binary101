@@ -1,6 +1,8 @@
 package pt.migcv.binary101.activities;
 
+import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import pt.migcv.binary101.R;
+import pt.migcv.binary101.fragments.CalculatorFragment;
 import pt.migcv.binary101.fragments.ConverterFragment;
 
 /**
@@ -36,8 +39,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         FragmentManager fm = getFragmentManager();
-        fm.beginTransaction().replace(R.id.content_frame, new ConverterFragment()).commit();
-
+        fm.beginTransaction().replace(R.id.content_frame, new ConverterFragment(), "CONVERTER_FRAGMENT").commit();
     }
 
 
@@ -78,19 +80,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        FragmentManager fm = getFragmentManager();
+        if (id == R.id.nav_converter) {
+            Fragment myFragment = (Fragment)getFragmentManager().findFragmentByTag("CONVERTER_FRAGMENT");
+            if (!myFragment.isVisible()) {
+                fm.beginTransaction().replace(R.id.content_frame, new ConverterFragment(), "CONVERTER_FRAGMENT").commit();
+            }
+        } else if (id == R.id.nav_calculator) {
+            //replaceFragment(new CalculatorFragment());
+            //fm.beginTransaction().replace(R.id.content_frame, new CalculatorFragment()).commit();
+        }  else if (id == R.id.nav_settings) {
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        }  else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_about) {
 
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void replaceFragment (android.app.Fragment fragment){
+        String backStateName = fragment.getClass().getName();
+
+        FragmentManager fm = getFragmentManager();
+        boolean fragmentPopped = fm.popBackStackImmediate (backStateName, 0);
+
+        if (!fragmentPopped){ //fragment not in back stack, create it.
+            FragmentTransaction ft = fm.beginTransaction();
+            //ft.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
+            ft.replace(R.id.content_frame, fragment);
+            ft.addToBackStack(backStateName);
+            ft.commit();
+        }
     }
 }
