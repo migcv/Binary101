@@ -12,8 +12,6 @@
     <FrameLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/content_frame">
-
-    </FrameLayout>
+        android:id="@+id/content_frame" />
 
 </RelativeLayout>

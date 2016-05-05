@@ -17,9 +17,6 @@ import pt.migcv.binary101.R;
 import pt.migcv.binary101.fragments.CalculatorFragment;
 import pt.migcv.binary101.fragments.ConverterFragment;
 
-/**
- * Created by Miguel on 16/04/2016.
- */
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
@@ -39,7 +36,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         FragmentManager fm = getFragmentManager();
-        fm.beginTransaction().replace(R.id.content_frame, new ConverterFragment(), "CONVERTER_FRAGMENT").commit();
+        Fragment converterFragment = new ConverterFragment();
+
+        fm.popBackStack(ConverterFragment.class.getName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        fm.beginTransaction().add(R.id.content_frame, converterFragment, "CONVERTER_FRAGMENT").commit();
     }
 
 
@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return true;
         }
 
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -82,13 +83,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
         FragmentManager fm = getFragmentManager();
         if (id == R.id.nav_converter) {
-            Fragment myFragment = (Fragment)getFragmentManager().findFragmentByTag("CONVERTER_FRAGMENT");
+            Fragment fragment = new ConverterFragment();
+            replaceFragment(fragment);
+            /*Fragment myFragment = (Fragment)getFragmentManager().findFragmentByTag("CONVERTER_FRAGMENT");
             if (!myFragment.isVisible()) {
                 fm.beginTransaction().replace(R.id.content_frame, new ConverterFragment(), "CONVERTER_FRAGMENT").commit();
-            }
+            }*/
         } else if (id == R.id.nav_calculator) {
-            //replaceFragment(new CalculatorFragment());
-            //fm.beginTransaction().replace(R.id.content_frame, new CalculatorFragment()).commit();
+            Fragment fragment = new CalculatorFragment();
+            replaceFragment(fragment);
         }  else if (id == R.id.nav_settings) {
 
         } else if (id == R.id.nav_about) {
@@ -100,10 +103,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    private void replaceFragment (android.app.Fragment fragment){
+    private void replaceFragment(android.app.Fragment fragment){
         String backStateName = fragment.getClass().getName();
 
         FragmentManager fm = getFragmentManager();
+        fm.popBackStack(ConverterFragment.class.getName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
         boolean fragmentPopped = fm.popBackStackImmediate (backStateName, 0);
 
         if (!fragmentPopped){ //fragment not in back stack, create it.
