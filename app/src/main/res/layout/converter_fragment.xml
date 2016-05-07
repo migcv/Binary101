@@ -42,7 +42,8 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/hexadecimalText">
+        android:layout_below="@+id/hexadecimalText"
+        android:id="@+id/binaryKeyboard">
 
         <TableRow
             android:layout_width="match_parent"
@@ -115,7 +116,8 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/hexadecimalText">
+        android:layout_below="@+id/hexadecimalText"
+        android:id="@+id/decimalKeyboard">
 
         <TableRow
             android:layout_width="match_parent"
@@ -252,7 +254,9 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/hexadecimalText">
+        android:layout_below="@+id/hexadecimalText"
+        android:orientation="vertical"
+        android:id="@+id/hexadecimalKeyboard">
 
         <TableRow
             android:layout_width="match_parent"

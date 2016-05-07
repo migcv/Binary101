@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TableLayout;
 
 import pt.migcv.binary101.R;
 import pt.migcv.binary101.core.Converter;
@@ -24,42 +25,9 @@ public class ConverterFragment extends Fragment {
     EditText decimalText;
     EditText hexadecimalText;
 
-    Button binary0Button;
-    Button binary1Button;
-    Button binaryDeleteButton;
-    Button binaryClrButton;
-
-    Button decimal0Button;
-    Button decimal1Button;
-    Button decimal2Button;
-    Button decimal3Button;
-    Button decimal4Button;
-    Button decimal5Button;
-    Button decimal6Button;
-    Button decimal7Button;
-    Button decimal8Button;
-    Button decimal9Button;
-    Button decimalDeleteButton;
-    Button decimalClrButton;
-
-    Button hexadecimal0Button;
-    Button hexadecimal1Button;
-    Button hexadecimal2Button;
-    Button hexadecimal3Button;
-    Button hexadecimal4Button;
-    Button hexadecimal5Button;
-    Button hexadecimal6Button;
-    Button hexadecimal7Button;
-    Button hexadecimal8Button;
-    Button hexadecimal9Button;
-    Button hexadecimalAButton;
-    Button hexadecimalBButton;
-    Button hexadecimalCButton;
-    Button hexadecimalDButton;
-    Button hexadecimalEButton;
-    Button hexadecimalFButton;
-    Button hexadecimalDeleteButton;
-    Button hexadecimalClrButton;
+    TableLayout binaryKeyboard;
+    TableLayout decimalKeyboard;
+    TableLayout hexadecimalKeyboard;
 
     boolean flag = false;
 
@@ -141,23 +109,23 @@ public class ConverterFragment extends Fragment {
 
     public void initializeElements() {
         //BINARY BUTTONS
-        binary0Button = (Button) view.findViewById(R.id.binary0Button);
-        binary1Button = (Button) view.findViewById(R.id.binary1Button);
-        binaryDeleteButton = (Button) view.findViewById(R.id.binaryDeleteButton);
-        binaryClrButton = (Button) view.findViewById(R.id.binaryClrButton);
+        view.findViewById(R.id.binary0Button).setOnClickListener(new OnClickBinary());
+        view.findViewById(R.id.binary1Button).setOnClickListener(new OnClickBinary());
+        view.findViewById(R.id.binaryDeleteButton).setOnClickListener(new OnClickDelete());
+        view.findViewById(R.id.binaryClrButton).setOnClickListener(new OnClickClr());
         //DECIMAL BUTTONS
-        decimal0Button = (Button) view.findViewById(R.id.decimal0Button);
-        decimal1Button = (Button) view.findViewById(R.id.decimal1Button);
-        decimal2Button = (Button) view.findViewById(R.id.decimal2Button);
-        decimal3Button = (Button) view.findViewById(R.id.decimal3Button);
-        decimal4Button = (Button) view.findViewById(R.id.decimal4Button);
-        decimal5Button = (Button) view.findViewById(R.id.decimal5Button);
-        decimal6Button = (Button) view.findViewById(R.id.decimal6Button);
-        decimal7Button = (Button) view.findViewById(R.id.decimal7Button);
-        decimal8Button = (Button) view.findViewById(R.id.decimal8Button);
-        decimal9Button = (Button) view.findViewById(R.id.decimal9Button);
-        decimalDeleteButton = (Button) view.findViewById(R.id.decimalDeleteButton);
-        decimalClrButton = (Button) view.findViewById(R.id.decimalClrButton);
+        view.findViewById(R.id.decimal0Button).setOnClickListener(new OnClickDecimal());
+        view.findViewById(R.id.decimal1Button).setOnClickListener(new OnClickDecimal());
+        view.findViewById(R.id.decimal2Button).setOnClickListener(new OnClickDecimal());
+        view.findViewById(R.id.decimal3Button).setOnClickListener(new OnClickDecimal());
+        view.findViewById(R.id.decimal4Button).setOnClickListener(new OnClickDecimal());
+        view.findViewById(R.id.decimal5Button).setOnClickListener(new OnClickDecimal());
+        view.findViewById(R.id.decimal6Button).setOnClickListener(new OnClickDecimal());
+        view.findViewById(R.id.decimal7Button).setOnClickListener(new OnClickDecimal());
+        view.findViewById(R.id.decimal8Button).setOnClickListener(new OnClickDecimal());
+        view.findViewById(R.id.decimal9Button).setOnClickListener(new OnClickDecimal());
+        view.findViewById(R.id.decimalDeleteButton).setOnClickListener(new OnClickDelete());
+        view.findViewById(R.id.decimalClrButton).setOnClickListener(new OnClickClr());
         //HEXADECIMAL BUTTONS
         hexadecimal0Button = (Button) view.findViewById(R.id.hexadecimal0Button);
         hexadecimal1Button = (Button) view.findViewById(R.id.hexadecimal1Button);
@@ -186,24 +154,12 @@ public class ConverterFragment extends Fragment {
         hexadecimalText.setInputType(EditorInfo.TYPE_NULL);
         decimalText.setInputType(EditorInfo.TYPE_NULL);
 
+        binaryKeyboard = (TableLayout) view.findViewById(R.id.binaryKeyboard);
+        hexadecimalKeyboard = (TableLayout) view.findViewById(R.id.hexadecimalKeyboard);
+        decimalKeyboard = (TableLayout) view.findViewById(R.id.hexadecimalKeyboard);
+
         setAllButtonsInvisible();
 
-        binary0Button.setOnClickListener(new OnClickBinary());
-        binary1Button.setOnClickListener(new OnClickBinary());
-        binaryDeleteButton.setOnClickListener(new OnClickDelete());
-        binaryClrButton.setOnClickListener(new OnClickClr());
-        decimal0Button.setOnClickListener(new OnClickDecimal());
-        decimal1Button.setOnClickListener(new OnClickDecimal());
-        decimal2Button.setOnClickListener(new OnClickDecimal());
-        decimal3Button.setOnClickListener(new OnClickDecimal());
-        decimal4Button.setOnClickListener(new OnClickDecimal());
-        decimal5Button.setOnClickListener(new OnClickDecimal());
-        decimal6Button.setOnClickListener(new OnClickDecimal());
-        decimal7Button.setOnClickListener(new OnClickDecimal());
-        decimal8Button.setOnClickListener(new OnClickDecimal());
-        decimal9Button.setOnClickListener(new OnClickDecimal());
-        decimalDeleteButton.setOnClickListener(new OnClickDelete());
-        decimalClrButton.setOnClickListener(new OnClickClr());
         hexadecimal0Button.setOnClickListener(new onClickHexadecimal());
         hexadecimal1Button.setOnClickListener(new onClickHexadecimal());
         hexadecimal2Button.setOnClickListener(new onClickHexadecimal());
@@ -231,11 +187,7 @@ public class ConverterFragment extends Fragment {
                     binaryText.setText("");
                     flag = false;
                 }
-                System.out.println("WIDTH <binaryText> : " + binaryText.getMeasuredWidth());
-                binary0Button.setVisibility(View.VISIBLE);
-                binary1Button.setVisibility(View.VISIBLE);
-                binaryDeleteButton.setVisibility(View.VISIBLE);
-                binaryClrButton.setVisibility(View.VISIBLE);
+                binaryKeyboard.setVisibility(View.VISIBLE);
             }
         });
 
@@ -246,18 +198,7 @@ public class ConverterFragment extends Fragment {
                 if (decimalText.getText().toString().equals("0")) {
                     decimalText.setText("");
                 }
-                decimal0Button.setVisibility(View.VISIBLE);
-                decimal1Button.setVisibility(View.VISIBLE);
-                decimal2Button.setVisibility(View.VISIBLE);
-                decimal3Button.setVisibility(View.VISIBLE);
-                decimal4Button.setVisibility(View.VISIBLE);
-                decimal5Button.setVisibility(View.VISIBLE);
-                decimal6Button.setVisibility(View.VISIBLE);
-                decimal7Button.setVisibility(View.VISIBLE);
-                decimal8Button.setVisibility(View.VISIBLE);
-                decimal9Button.setVisibility(View.VISIBLE);
-                decimalDeleteButton.setVisibility(View.VISIBLE);
-                decimalClrButton.setVisibility(View.VISIBLE);
+                decimalKeyboard.setVisibility(View.VISIBLE);
             }
         });
 
@@ -268,24 +209,7 @@ public class ConverterFragment extends Fragment {
                 if (hexadecimalText.getText().toString().equals("0")) {
                     hexadecimalText.setText("");
                 }
-                hexadecimal0Button.setVisibility(View.VISIBLE);
-                hexadecimal1Button.setVisibility(View.VISIBLE);
-                hexadecimal2Button.setVisibility(View.VISIBLE);
-                hexadecimal3Button.setVisibility(View.VISIBLE);
-                hexadecimal4Button.setVisibility(View.VISIBLE);
-                hexadecimal5Button.setVisibility(View.VISIBLE);
-                hexadecimal6Button.setVisibility(View.VISIBLE);
-                hexadecimal7Button.setVisibility(View.VISIBLE);
-                hexadecimal8Button.setVisibility(View.VISIBLE);
-                hexadecimal9Button.setVisibility(View.VISIBLE);
-                hexadecimalAButton.setVisibility(View.VISIBLE);
-                hexadecimalBButton.setVisibility(View.VISIBLE);
-                hexadecimalCButton.setVisibility(View.VISIBLE);
-                hexadecimalDButton.setVisibility(View.VISIBLE);
-                hexadecimalEButton.setVisibility(View.VISIBLE);
-                hexadecimalFButton.setVisibility(View.VISIBLE);
-                hexadecimalDeleteButton.setVisibility(View.VISIBLE);
-                hexadecimalClrButton.setVisibility(View.VISIBLE);
+                hexadecimalKeyboard.setVisibility(View.VISIBLE);
             }
         });
 
@@ -414,41 +338,8 @@ public class ConverterFragment extends Fragment {
     }
 
     private void setAllButtonsInvisible() {
-        binary0Button.setVisibility(View.INVISIBLE);
-        binary1Button.setVisibility(View.INVISIBLE);
-        binaryDeleteButton.setVisibility(View.INVISIBLE);
-        binaryClrButton.setVisibility(View.INVISIBLE);
-
-        decimal0Button.setVisibility(View.INVISIBLE);
-        decimal1Button.setVisibility(View.INVISIBLE);
-        decimal2Button.setVisibility(View.INVISIBLE);
-        decimal3Button.setVisibility(View.INVISIBLE);
-        decimal4Button.setVisibility(View.INVISIBLE);
-        decimal5Button.setVisibility(View.INVISIBLE);
-        decimal6Button.setVisibility(View.INVISIBLE);
-        decimal7Button.setVisibility(View.INVISIBLE);
-        decimal8Button.setVisibility(View.INVISIBLE);
-        decimal9Button.setVisibility(View.INVISIBLE);
-        decimalDeleteButton.setVisibility(View.INVISIBLE);
-        decimalClrButton.setVisibility(View.INVISIBLE);
-
-        hexadecimal0Button.setVisibility(View.INVISIBLE);
-        hexadecimal1Button.setVisibility(View.INVISIBLE);
-        hexadecimal2Button.setVisibility(View.INVISIBLE);
-        hexadecimal3Button.setVisibility(View.INVISIBLE);
-        hexadecimal4Button.setVisibility(View.INVISIBLE);
-        hexadecimal5Button.setVisibility(View.INVISIBLE);
-        hexadecimal6Button.setVisibility(View.INVISIBLE);
-        hexadecimal7Button.setVisibility(View.INVISIBLE);
-        hexadecimal8Button.setVisibility(View.INVISIBLE);
-        hexadecimal9Button.setVisibility(View.INVISIBLE);
-        hexadecimalAButton.setVisibility(View.INVISIBLE);
-        hexadecimalBButton.setVisibility(View.INVISIBLE);
-        hexadecimalCButton.setVisibility(View.INVISIBLE);
-        hexadecimalDButton.setVisibility(View.INVISIBLE);
-        hexadecimalEButton.setVisibility(View.INVISIBLE);
-        hexadecimalFButton.setVisibility(View.INVISIBLE);
-        hexadecimalDeleteButton.setVisibility(View.INVISIBLE);
-        hexadecimalClrButton.setVisibility(View.INVISIBLE);
+        binaryKeyboard.setVisibility(View.INVISIBLE);
+        decimalKeyboard.setVisibility(View.INVISIBLE);
+        hexadecimalKeyboard.setVisibility(View.INVISIBLE);
     }
 }
