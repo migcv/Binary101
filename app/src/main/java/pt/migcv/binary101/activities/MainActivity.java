@@ -3,6 +3,7 @@ package pt.migcv.binary101.activities;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,21 +15,24 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import pt.migcv.binary101.R;
+import pt.migcv.binary101.fragments.AboutFragment;
 import pt.migcv.binary101.fragments.CalculatorFragment;
 import pt.migcv.binary101.fragments.ConverterFragment;
+import pt.migcv.binary101.fragments.SettingsFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setTitle("Converter");
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
@@ -37,7 +41,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         FragmentManager fm = getFragmentManager();
         Fragment converterFragment = new ConverterFragment();
-
         fm.popBackStack(ConverterFragment.class.getName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
         fm.beginTransaction().add(R.id.content_frame, converterFragment, "CONVERTER_FRAGMENT").commit();
     }
@@ -71,8 +74,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.action_settings) {
             return true;
         }
-
-
+        else if (id == R.id.action_keyboardCheckBox) {
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -83,19 +87,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
         FragmentManager fm = getFragmentManager();
         if (id == R.id.nav_converter) {
-            Fragment fragment = new ConverterFragment();
-            replaceFragment(fragment);
-            /*Fragment myFragment = (Fragment)getFragmentManager().findFragmentByTag("CONVERTER_FRAGMENT");
+            Fragment myFragment = getFragmentManager().findFragmentByTag("CONVERTER_FRAGMENT");
             if (!myFragment.isVisible()) {
-                fm.beginTransaction().replace(R.id.content_frame, new ConverterFragment(), "CONVERTER_FRAGMENT").commit();
-            }*/
+                Fragment fragment = new ConverterFragment();
+                setTitle("Converter");
+                replaceFragment(fragment, "CONVERTER_FRAGMENT");
+            }
         } else if (id == R.id.nav_calculator) {
             Fragment fragment = new CalculatorFragment();
-            replaceFragment(fragment);
-        }  else if (id == R.id.nav_settings) {
-
+            setTitle("Calculator");
+            replaceFragment(fragment, "CALCULATOR_FRAGMENT");
+        } else if (id == R.id.nav_settings) {
+            Fragment fragment = new SettingsFragment();
+            setTitle("Settings");
+            replaceFragment(fragment, "SETTINGS_FRAGMENT");
         } else if (id == R.id.nav_about) {
-
+            Fragment fragment = new AboutFragment();
+            setTitle("About");
+            replaceFragment(fragment, "ABOUT_FRAGMENT");
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -103,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    private void replaceFragment(android.app.Fragment fragment){
+    private void replaceFragment(Fragment fragment, String fragmentTag){
         String backStateName = fragment.getClass().getName();
 
         FragmentManager fm = getFragmentManager();
@@ -113,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (!fragmentPopped){ //fragment not in back stack, create it.
             FragmentTransaction ft = fm.beginTransaction();
             //ft.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
-            ft.replace(R.id.content_frame, fragment);
+            ft.replace(R.id.content_frame, fragment, fragmentTag);
             ft.addToBackStack(backStateName);
             ft.commit();
         }

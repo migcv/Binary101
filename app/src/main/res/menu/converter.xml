@@ -8,7 +8,7 @@
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/keyboardCheckBox"
+        android:id="@+id/action_keyboardCheckBox"
         android:checkable="true"
         android:orderInCategory="100"
         android:title="Normal Keyboard"
