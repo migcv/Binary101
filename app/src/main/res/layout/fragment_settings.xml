@@ -2,34 +2,146 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="pt.migcv.binary101.fragments.SettingsFragment"
     android:descendantFocusability="beforeDescendants"
     android:focusableInTouchMode="true">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Keyboard"
-        android:id="@+id/keyboardView"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
 
-    <Switch
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="System Keyboard"
-        android:id="@+id/systemKeyboardSwitch"
-        android:layout_below="@+id/keyboardView"
-        android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/keyboardView"
-        android:checked="false" />
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="16dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="16dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Keyboard"
+                android:id="@+id/keyboardView"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:textSize="25dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="21dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp" >
+
+            <Switch
+                android:text="System Keyboard"
+                android:id="@+id/systemKeyboardSwitch"
+                android:checked="false"
+                android:textSize="20dp"
+                android:layout_weight="1" />
+        </TableRow>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="16dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="16dp" >
+
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Converter"
+                android:id="@+id/converterView"
+                android:textStyle="bold"
+                android:textSize="25dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="5dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp" >
+
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Binary"
+                android:id="@+id/binaryView"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="16dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp" >
+
+            <Switch
+                android:text="Spacing every 4 bits"
+                android:id="@+id/binarySpacingSwitch"
+                android:checked="true"
+                android:textSize="20dp"
+                android:layout_weight="1" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="5dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp" >
+
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Decimal"
+                android:id="@+id/decimalView"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="16dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp" >
+
+            <Switch
+                android:text="Spacing every 3 numbers"
+                android:id="@+id/decimalSpacingSwitch"
+                android:checked="true"
+                android:textSize="20dp"
+                android:layout_weight="1" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="21dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp" >
+
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Hexadecimal"
+                android:id="@+id/hexadecimalView"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+    </TableLayout>
 
 </RelativeLayout>

@@ -9,7 +9,9 @@ import pt.migcv.binary101.core.exception.NotHexadecimalException;
 
 public class Converter {
 
-    private static char[] hexaAlphabet = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+    private static final char[] HEXA_ALPHABET = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+    private static final int BINARY_SPACING = 4;
+    private static final int DECIMAL_SPACING = 3;
 
     public static String[] convertDecimal(String decimalNumber) throws NotDecimalException, IsEmptyException {
         decimalNumber = decimalNumber.replaceAll("\\s+","");
@@ -24,8 +26,8 @@ public class Converter {
             String hexadecimalNumber = convertBinaryToHexadecimal(binaryNumber);
             System.out.println("10:BINARY: " + binaryNumber);
             System.out.println("10:HEXADECIMAL: " + hexadecimalNumber);
-            res[0] = formatString(binaryNumber, 4, ' ');    // BINARY NUMBER
-            res[1] = formatString(decimalNumber, 3, ' ');   // DECIMAL NUMBER
+            res[0] = Settings.isBinarySpacing() ? formatString("" + binaryNumber, BINARY_SPACING, ' ') : "" + binaryNumber;   // BINARY NUMBER
+            res[1] = Settings.isDecimalSpacing() ? formatString("" + decimalNumber, DECIMAL_SPACING, ' ') : "" + decimalNumber;  // DECIMAL NUMBER
             res[2] = hexadecimalNumber;
             return res;
         } catch (NumberFormatException e) {
@@ -52,8 +54,8 @@ public class Converter {
         String hexadecimalNumber = convertBinaryToHexadecimal(binaryNumber);
         System.out.println("2:DECIMAL: " + decimalNumber);
         System.out.println("2:HEXADECIMAL: " + hexadecimalNumber);
-        res[0] = formatString("" + binaryNumber, 4, ' ');   // BINARY NUMBER
-        res[1] = formatString("" + decimalNumber, 3, ' ');  // DECIMAL NUMBER
+        res[0] = Settings.isBinarySpacing() ? formatString("" + binaryNumber, BINARY_SPACING, ' ') : "" + binaryNumber;   // BINARY NUMBER
+        res[1] = Settings.isDecimalSpacing() ? formatString("" + decimalNumber, DECIMAL_SPACING, ' ') : "" + decimalNumber;  // DECIMAL NUMBER
         res[2] = hexadecimalNumber;
         return res;
     }
@@ -68,8 +70,8 @@ public class Converter {
         int decimalNumber = 0;
         // HEXADECIMAL --> DECIMAL
         for (int i = 0; i < hexadecimalNumber.length(); i++) {
-            for (int j = 0; j < hexaAlphabet.length; j++) {
-                if (hexadecimalNumber.charAt(i) == hexaAlphabet[j]) {
+            for (int j = 0; j < HEXA_ALPHABET.length; j++) {
+                if (hexadecimalNumber.charAt(i) == HEXA_ALPHABET[j]) {
                     decimalNumber += Math.pow(16, hexadecimalNumber.length() - 1 - i) * j;
                     break;
                 }
@@ -79,8 +81,8 @@ public class Converter {
         String binaryNumber = Integer.toString(decimalNumber, 2);
         System.out.println("16:DECIMAL: " + decimalNumber);
         System.out.println("16:BINARY: " + binaryNumber);
-        res[0] = formatString(binaryNumber, 4, ' ');  // BINARY NUMBER
-        res[1] = formatString(""+decimalNumber, 3, ' '); // DECIMAL NUMBER
+        res[0] = Settings.isBinarySpacing() ? formatString("" + binaryNumber, BINARY_SPACING, ' ') : "" + binaryNumber;   // BINARY NUMBER
+        res[1] = Settings.isDecimalSpacing() ? formatString("" + decimalNumber, DECIMAL_SPACING, ' ') : "" + decimalNumber;  // DECIMAL NUMBER
         res[2] = hexadecimalNumber;
         return res;
     }
@@ -102,7 +104,7 @@ public class Converter {
             }
         }
         for (int i = 0; i < hexadecimalArray.size(); i++) {
-            hexadecimalNumber += "" + hexaAlphabet[hexadecimalArray.get(hexadecimalArray.size() - 1 - i)];
+            hexadecimalNumber += "" + HEXA_ALPHABET[hexadecimalArray.get(hexadecimalArray.size() - 1 - i)];
         }
         return hexadecimalNumber;
     }

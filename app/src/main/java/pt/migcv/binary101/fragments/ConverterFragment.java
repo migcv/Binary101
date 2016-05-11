@@ -6,6 +6,7 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -120,13 +121,11 @@ public class ConverterFragment extends Fragment {
             hexadecimalText.setRawInputType(InputType.TYPE_CLASS_TEXT);
             decimalText.setRawInputType(InputType.TYPE_CLASS_TEXT);
             getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE | WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN );
-            System.out.println("KEYBOARD ON MUDAFUCKAS!!!");
         } else { // USING APP's KEYBOARD
             binaryText.setInputType(EditorInfo.TYPE_NULL);
             hexadecimalText.setInputType(EditorInfo.TYPE_NULL);
             decimalText.setInputType(EditorInfo.TYPE_NULL);
             getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-            System.out.println("KEYBOARD OFF BITXES!!!");
         }
         //BINARY BUTTONS
         view.findViewById(R.id.binary0Button).setOnClickListener(new OnClickBinary());
@@ -182,7 +181,6 @@ public class ConverterFragment extends Fragment {
                 }
                 if(!Settings.isSystemKeyboardOn())
                     binaryKeyboard.setVisibility(View.VISIBLE);
-
             }
         });
 

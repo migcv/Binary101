@@ -17,6 +17,8 @@ public class SettingsFragment extends Fragment {
     View view;
 
     Switch systemKeyboardSwitch;
+    Switch binarySpacingSwitch;
+    Switch decimalSpacingSwitch;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -27,18 +29,34 @@ public class SettingsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_settings, container, false);
         systemKeyboardSwitch = (Switch) view.findViewById(R.id.systemKeyboardSwitch);
-        if(Settings.isSystemKeyboardOn()) {
-            systemKeyboardSwitch.setChecked(true);
-        }
+        binarySpacingSwitch = (Switch) view.findViewById(R.id.binarySpacingSwitch);
+        decimalSpacingSwitch = (Switch) view.findViewById(R.id.decimalSpacingSwitch);
+
+        systemKeyboardSwitch.setChecked(Settings.isSystemKeyboardOn());
+        binarySpacingSwitch.setChecked(Settings.isBinarySpacing());
+        decimalSpacingSwitch.setChecked(Settings.isDecimalSpacing());
+
         systemKeyboardSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(systemKeyboardSwitch.isChecked())
-                    Settings.setSystemKeyboard(true);
-                else
-                    Settings.setSystemKeyboard(false);
+                Settings.setSystemKeyboard((boolean) systemKeyboardSwitch.isChecked());
             }
         });
+
+        binarySpacingSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Settings.setBinarySpacing((boolean) binarySpacingSwitch.isChecked());
+            }
+        });
+
+        decimalSpacingSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Settings.setDecimalSpacing((boolean) decimalSpacingSwitch.isChecked());
+            }
+        });
+
         return view;
     }
 }
